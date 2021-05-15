@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+
+{% block title %}
+    login
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <h1 class="text-center" style="background-color: chartreuse">Login Page</h1>
+            <form method="post">
+                {{ form.csrf_token }}
+                <label for="email" class="form-label">{{ form.email.label }}</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                <label for="password" class="form-label">{{ form.password.label }}</label>
+                <input type="password" class="form-control" id="password">
+                <button class="btn btn-primary my-2" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
