@@ -1,7 +1,7 @@
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db
+from app import db, login_manager
 
 
 class User(UserMixin, db.Model):
@@ -25,8 +25,31 @@ class User(UserMixin, db.Model):
     def verify_password(self, password: str) -> bool:
         return check_password_hash(self.password_hash, password)
 
+    def get_id(self) -> int:
+        """
+        for login_manager support
+        :return: id
+        """
+        return self.pk
+
     def __str__(self):
         return self.username
 
     def __repr__(self):
         return f'<User {self.username}>'
+
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
+
+    def is_administrator(self):
+        return False
+
+
+login_manager.anonymous_user = AnonymousUser
+
+
+@login_manager.user_loader
+def load_user(user_id: int) -> User:
+    return User.query.get(int(user_id))

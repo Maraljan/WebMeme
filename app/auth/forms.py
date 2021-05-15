@@ -9,7 +9,6 @@ from app.models.auth import User
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log in')
 
 
 class RegistrationForm(FlaskForm):
@@ -27,7 +26,6 @@ class RegistrationForm(FlaskForm):
         EqualTo('repeat_password', message='Password must match.'),
     ])
     repeat_password = PasswordField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('Register')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data.lower()).first():

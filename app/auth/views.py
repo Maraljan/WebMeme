@@ -1,4 +1,5 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash, request
+from flask_login import login_user, login_required, logout_user
 
 from . import auth
 from app import db
@@ -9,7 +10,24 @@ from app.models.auth import User
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data.lower()).first()
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            next_page = request.args.get('next')
+            if next_page is None or not next_page.startswith('/'):
+                next_page = url_for('main.index')
+            return redirect(next_page)
+        flash('Invalid email or password.')
     return render_template('auth/login.html', form=form)
+
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('auth.login'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -23,5 +41,7 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
+        flash('Registration is successful. Now you can try to login')
         return redirect(url_for('auth.login'))
+
     return render_template('auth/register.html', form=form)
