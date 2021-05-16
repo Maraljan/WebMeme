@@ -8,3 +8,9 @@ from . import main
 @login_required
 def index():
     return render_template('index.html')
+
+
+@main.route('/gallery')
+@login_required
+def gallery():
+    return render_template('gallery.html')

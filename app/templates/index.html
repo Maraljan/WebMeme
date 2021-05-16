@@ -1,9 +1,32 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
     Home page
 {% endblock %}
 
 {% block content %}
-    <h1>HELLO In HOME PAGE</h1>
+
+    <style>
+        body{
+            background-image: url('/static/img.png');
+            background-size: cover;
+        }
+    </style>
+    <h1 class="main-text btn-position to-hide">Do you want to make a perfect Meme?</h1>
+
+    <a
+        class="btn btn-outline-light to-hide"
+        type="submit"
+        href="#"
+        onclick="toggleElements('to-hide', true); toggleElements('to-show', false)"
+    >
+        Start with great images
+    </a>
+
+    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="#">Caption template</a>
+    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="#">Upload your own images</a>
+
+    <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
+
 {% endblock %}

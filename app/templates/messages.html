@@ -3,7 +3,7 @@
         <ul>
             {% for category, message in messages %}
 
-                <div class="alert mx-5 {% if category.value %} {{ category.value }} {% else %} alert-danger {% endif %}" role="alert">
+                <div class="alert mx-5 {{ category }}" role="alert">
                     {{ message }}
                 </div>
             {% endfor %}

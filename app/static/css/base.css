@@ -1,0 +1,13 @@
+.main-text{
+    color: #c5dcbb;
+    font-family: Bahnschrift,sans-serif;
+    font-size: 3.1em;
+    text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000;
+}
+
+
+.btn-position{
+    margin-top: 400px;
+}

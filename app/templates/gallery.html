@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Gallery
+{% endblock %}
+{% block content %}
+    <div class="row">
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="/static/gallery_image/2.jpg">
+            <img src="/static/gallery_image/2.jpg" alt="Lights" style="width: 300px; height: 300px">
+            <div class="caption">
+              <p>Lorem ipsum...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="/static/gallery_image/1.png">
+            <img src="/static/gallery_image/1.png" alt="Nature" style="width: 300px; height: 300px">
+            <div class="caption">
+              <p>Lorem ipsum...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="/static/gallery_image/3.jpg">
+            <img src="/static/gallery_image/3.jpg" alt="Fjords" style="width: 300px; height: 300px">
+            <div class="caption">
+              <p>Lorem ipsum...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="/static/gallery_image/4.jpg">
+            <img src="/static/gallery_image/4.jpg" alt="Nature" style="width: 300px; height: 300px">
+            <div class="caption">
+              <p>Lorem ipsum...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+       <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="/static/gallery_image/6.jpg">
+            <img src="/static/gallery_image/6.jpg" alt="Nature" style="width: 300px; height: 300px">
+            <div class="caption">
+              <p>Lorem ipsum...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+        <div class="card" style="width: 19rem;">
+          <img src="{{ url_for('static', filename='gallery_image/7.png')}}" class="card-img-top" alt="LOVE">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-outline-dark">Make a Meme</a>
+          </div>
+        </div>
+        <div class="card" style="width: 19rem;">
+          <img src="{{ url_for('static', filename='gallery_image/8.png')}}" class="card-img-top" alt="LOVE">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-outline-dark">Make a Meme</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-outline-dark mx-3">Add to archive</a>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+{% endblock content %}

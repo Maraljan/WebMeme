@@ -15,7 +15,8 @@
                 {{ form.email(type="email", class="form-control", id="email", placeholder='name@example.com') }}
                 {{ form.password.label(for="password", class="form-label") }}
                 {{ form.password(type="password", class="form-control", id="password") }}
-                <button class="btn btn-primary my-2" type="submit">Login</button>
+                <button class="btn btn-outline-dark my-2" type="submit">Login</button>
+                <a class="btn btn-outline-success" type="submit" href="{{ url_for('auth.register') }}">Register</a>
             </form>
         </div>
     </div>
