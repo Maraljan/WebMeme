@@ -2,8 +2,13 @@ import os
 from enum import Enum
 from pathlib import Path
 
-# absolute path to project dir
+# absolute paths to project dir
 BASEDIR = Path(__file__).parent
+APP_DIR = BASEDIR.joinpath('app')
+STATIC_DIR = APP_DIR.joinpath('static')
+IMAGES_DIR = STATIC_DIR.joinpath('images')
+
+IMAGES_PREFIX = 'static/images'
 
 
 class Config:
@@ -28,4 +33,3 @@ configs = {
     ConfigName.DEVELOPMENT: DevelopmentConfig,
     ConfigName.DEFAULT: DevelopmentConfig,
 }
-

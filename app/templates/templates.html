@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    templates
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <form method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                {{ form.title.label(for="title", class="form-label") }}
+                {{ form.title(type="title", class="form-control", id="title") }}
+                {{ form.img.label(for="img", class="form-label") }}
+                {{ form.img(type="file", class="form-control", id="img") }}
+                <button class="btn btn-outline-dark my-2" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        {% for template in all_templates %}
+            <div class="col-3">
+                <div class="card text-white">
+                    <img src="{{ template.image_url() }}" class="card-img">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{ template.title }}</h5>
+                        <div class="row position-absolute my-top-85 start-50 translate-middle">
+                            <div class="col-10">
+                            <a href="{{ url_for('main.create_template', title=template.title) }}" class="btn btn-outline-light"><i class="bi bi-pencil-square"></i> Make a Meme</a>
+                            </div>
+                            <div class="col-2">
+                            <a href="#" class="btn text-danger"><i class="bi bi-heart-fill" style="font-size: 150%;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+{% endblock %}
