@@ -1,23 +1,78 @@
 {% extends 'base.html' %}
 
-
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
 {% block title %}
     login
 {% endblock %}
 
 {% block content %}
-    <div class="row justify-content-md-center">
-        <div class="col col-6">
-            <h1 class="text-center" style="background-color: #b4aea7">Login Page</h1>
-            <form method="post">
-                {{ form.csrf_token }}
-                {{ form.email.label(for="email", class="form-label") }}
-                {{ form.email(type="email", class="form-control", id="email", placeholder='name@example.com') }}
-                {{ form.password.label(for="password", class="form-label") }}
-                {{ form.password(type="password", class="form-control", id="password") }}
-                <button class="btn btn-outline-dark my-2" type="submit">Login</button>
-                <a class="btn btn-outline-success" type="submit" href="{{ url_for('auth.register') }}">Register</a>
-            </form>
+    <div class="row">
+    <div class="col-md-6 mx-auto p-0">
+        <div class="card">
+            <div class="login-box">
+                <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                    <div class="login-space">
+                        <form method="post">
+                            {{ form.csrf_token }}
+                            <div class="login">
+                                <div class="group"> <label for="user" class="label">Username</label>{{ form.email_login(type="email", class="input", id="email_login", placeholder="Create your email") }}</div>
+                                <div class="group"> <label for="pass" class="label">Password</label> {{ form.password_login(type="password", class="input", id="password_login", placeholder="Create your password") }}</div>
+                                <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
+                                <div class="hr"></div>
+                            </div>
+                        </form>
+                        <form method="post">
+                            {{ form2.csrf_token }}
+                             <div class="sign-up-form">
+                                 <div class="group"> <label for="user" class="label">Username</label>{{ form2.username(type="text", class="input", id="username") }}</div>
+                                 <div class="group"> <label for="pass" class="label">Email Address</label>{{ form2.email(type="email", class="input", id="email", placeholder='name@example.com') }}</div>
+                                     {% if form2.email.errors %}
+                                        <ul class="errors">
+                                     {% for error in form2.email.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                     {% endfor %}
+                                        </ul>
+                                     {% endif %}
+                                 <div class="group"> <label for="pass" class="label">Password</label>{{ form2.password(type="password", class="input", id="password") }}</div>
+                                     {% if form2.password.errors %}
+                                        <ul class="errors">
+                                     {% for error in form2.password.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                     {% endfor %}
+                                        </ul>
+                                     {% endif %}
+                                 <div class="group"> <label for="pass" class="label">Repeat Password</label>{{ form2.repeat_password(type="password", class="input", id="repeat_password") }}</div>
+                                     {% if form2.repeat_password.errors %}
+                                        <ul class="errors">
+                                     {% for error in form2.repeat_password.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                     {% endfor %}
+                                        </ul>
+                                     {% endif %}
+                                 <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                                 <div class="hr"></div>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+{#    <div class="row justify-content-md-center">#}
+{#        <div class="col col-6">#}
+{#            <h1 class="text-center" style="background-color: #b4aea7">Login Page</h1>#}
+{#            <form method="post">#}
+{#                {{ form.csrf_token }}#}
+{#                {{ form.email.label(for="email", class="form-label") }}#}
+{#                {{ form.email(type="email", class="form-control", id="email", placeholder='name@example.com') }}#}
+{#                {{ form.password.label(for="password", class="form-label") }}#}
+{#                {{ form.password(type="password", class="form-control", id="password") }}#}
+{#                <button class="btn btn-outline-dark my-2" type="submit">Login</button>#}
+{#                <a class="btn btn-outline-success" type="submit" href="{{ url_for('auth.register') }}">Register</a>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}

@@ -9,7 +9,7 @@
 
     <style>
         body{
-            background-image: url('/static/img.png');
+            background-image: url('../static/img.png');
             background-size: cover;
         }
     </style>
@@ -24,8 +24,8 @@
         Start with great images
     </a>
 
-    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="#">Caption template</a>
-    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="#">Upload your own images</a>
+    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="{{ url_for( 'main.templates') }}">Caption template</a>
+    <a class="btn btn-outline-light main-text btn-position to-show" type="submit" hidden href="{{ url_for( 'main.meme') }}">Meme gallery</a>
 
     <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
 

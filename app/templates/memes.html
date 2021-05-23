@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    memes
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for meme in memes %}
+            <div class="col-3">
+                <div class="card text-white">
+                    <img src="{{ meme.image_url() }}" class="card-img">
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+{% endblock %}

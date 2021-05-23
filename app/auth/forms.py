@@ -7,8 +7,8 @@ from app.models.auth import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    email_login = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
+    password_login = PasswordField('Password', validators=[DataRequired()])
 
 
 class RegistrationForm(FlaskForm):

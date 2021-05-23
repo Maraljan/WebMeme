@@ -13,3 +13,8 @@ class TemplateForm(FlaskForm):
     def validate_title(self, field: StringField):
         if MemeTemplate.query.filter_by(title=field.data).first():
             raise ValidationError('Title already used')
+
+
+class MemeForm(FlaskForm):
+    text_top = StringField('Text_top', validators=[DataRequired(), Length(1, 64)])
+    text_bottom = StringField('Text_bottom', validators=[DataRequired(), Length(1, 64)])

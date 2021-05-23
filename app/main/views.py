@@ -1,16 +1,18 @@
 from pathlib import Path
 
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_login import login_required, current_user
 
 from . import main
-from .forms import TemplateForm
+from .forms import TemplateForm, MemeForm
 from .. import db
 from ..common.alerts import Alert, alert
 from ..common.storage import ImageStorage
-from ..models.meme import MemeTemplate
+from ..models.meme import MemeTemplate, Meme
+from ..services.image_processing import text_generate
 
-storage = ImageStorage(Path('Test'))
+template_storage = ImageStorage(Path('Test'))
+meme_storage = ImageStorage(Path('Meme'))
 
 
 @main.route('/')
@@ -32,7 +34,7 @@ def templates():
     all_templates = MemeTemplate.query.filter_by(owner_id=current_user.pk)
     if form.validate_on_submit():
         file = form.img.data
-        path = storage.save(file)
+        path = template_storage.save(file)
         template = MemeTemplate(
             title=form.title.data,
             owner_id=current_user.pk,
@@ -47,5 +49,26 @@ def templates():
 @main.route('/create_meme/<title>', methods=['GET', 'POST'])
 @login_required
 def create_meme(title: str):
-    template = MemeTemplate.query.filter_by(title=title, owner_id=current_user.pk).first()
-    return render_template('create_meme.html', template=template)
+    template: MemeTemplate = MemeTemplate.query.filter_by(title=title, owner_id=current_user.pk).first()
+    form = MemeForm()
+    if form.validate_on_submit():
+        abs_path = template_storage.get(template.image_path)
+        edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
+        meme_path = meme_storage.save(edited_img)
+        meme = Meme(
+            owner_id=current_user.pk,
+            template_id=template.pk,
+            image_path=str(meme_path),
+        )
+        db.session.add(meme)
+        db.session.commit()
+        alert('Saving is successful.', Alert.SUCCESS)
+        return redirect((url_for('main.meme')))
+    return render_template('create_meme.html', form=form, template=template)
+
+
+@main.route('/meme', methods=['GET', 'POST'])
+@login_required
+def meme():
+    all_memes = Meme.query.filter_by(owner_id=current_user.pk)
+    return render_template('memes.html', memes=all_memes)

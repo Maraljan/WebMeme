@@ -7,26 +7,34 @@
 {% block content %}
     <style>
         body{
-            background-color: #bfe0f0;
+            background-color: #c55818;
         }
     </style>
-    <div class="card mx-auto" style="width: 30rem;">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item p-0" style="background-color: #86d3f0">
-                <input type="text" id="disabledTextInput" class="form-control text-center" placeholder="Enter top text">
-            </li>
-        </ul>
+    <form method="post">
+        {{ form.csrf_token }}
+        <div class="card mx-auto" style="width: 25rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-0" style="background-color: #86d3f0">
+                    {{ form.text_top(type="text", class="form-control", id="text_top", placeholder='Enter top text') }}
+                </li>
+            </ul>
 
-        <img src="{{ template.image_url() }}" class="card-img-top">
+            <a class="btn btn-outline-dark to-saving" type="submit" hidden href="#" onclick="toggleElements('to-editing', false);
+                toggleElements('to-saving', true)">Back to edit</a>
 
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item p-0" style="background-color: #86d3f0">
-                <input type="text" id="disabledTextInput" class="form-control text-center" placeholder="Enter bottom text">
-            </li>
-        </ul>
-        <div class="card-body text-center" style="background-color: #86d3f0">
-            <a href="#" class="card-link"><i class="bi bi-file-earmark-arrow-down" style="font-size: 150%"></i></a>
-            <a href="#" class="card-link"><i class="bi bi-heart-fill" style="font-size: 150%"></i></a>
+            <img src="{{ template.image_url() }}" class="card-img-top">
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-0" style="background-color: #86d3f0">
+                    {{ form.text_bottom(type="text", class="form-control", id="text_bottom", placeholder='Enter bottom text') }}
+                </li>
+            </ul>
+            <button class="btn-outline-primary  to-saving" type="submit" hidden>Save to desktop</button>
+            <button class="btn-outline-primary  to-saving" type="submit" hidden>Save to cloud</button>
+            <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
+            <a class="btn btn-outline-dark to-editing" type="submit" href="#"
+               onclick="toggleElements('to-editing', true); toggleElements('to-saving', false)">
+                <i class="bi bi-file-earmark-arrow-down" style="font-size: 150%"></i></a>
         </div>
-    </div>
+    </form>
 {% endblock %}
