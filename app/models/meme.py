@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from flask import url_for
+from sqlalchemy.orm import relationship
 
 from app import db
 from config import IMAGES_DIR
@@ -19,6 +20,7 @@ class MemeTemplate(db.Model, Common):
     pk = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), unique=True, index=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.pk'))
+    memes = relationship('Meme', backref='template')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -10,6 +10,9 @@
             <div class="col-3">
                 <div class="card text-white">
                     <img src="{{ meme.image_url() }}" class="card-img">
+                    <div class="col-10">
+                        <a href="{{ url_for('main.create_meme', title=meme.template.title) }}" class="btn btn-outline-light"><i class="bi bi-pencil-square"></i> Make a Meme</a>
+                    </div>
                 </div>
             </div>
         {% endfor%}
