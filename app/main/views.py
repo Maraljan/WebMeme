@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, send_file
 from flask_login import login_required, current_user
 
 from . import main
@@ -63,12 +63,19 @@ def create_meme(title: str):
         db.session.add(meme)
         db.session.commit()
         alert('Saving is successful.', Alert.SUCCESS)
-        return redirect((url_for('main.meme')))
+        return redirect((url_for('main.get_memes')))
     return render_template('create_meme.html', form=form, template=template)
 
 
 @main.route('/meme', methods=['GET', 'POST'])
 @login_required
-def meme():
+def get_memes():
     all_memes = Meme.query.filter_by(owner_id=current_user.pk)
     return render_template('memes.html', memes=all_memes)
+
+
+@main.route('/meme_download/<int:meme_id>')
+def meme_download(meme_id: int):
+    meme = Meme.query.filter_by(pk=meme_id, owner_id=current_user.pk).first()
+    abs_path = meme_storage.get(meme.image_path)
+    return send_file(str(abs_path), as_attachment=True)

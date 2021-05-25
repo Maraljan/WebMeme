@@ -13,6 +13,9 @@
                     <div class="col-10">
                         <a href="{{ url_for('main.create_meme', title=meme.template.title) }}" class="btn btn-outline-light"><i class="bi bi-pencil-square"></i> Make a Meme</a>
                     </div>
+                    <div class="col-2">
+                        <a href="{{ url_for('main.meme_download', meme_id=meme.pk) }}" class="btn text-danger"><i class="bi bi-file-arrow-down-fill" style="font-size: 150%;"></i></a>
+                    </div>
                 </div>
             </div>
         {% endfor%}
