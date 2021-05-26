@@ -9,7 +9,7 @@ from app.common.alerts import Alert, alert
 
 
 @auth.route('/login', methods=['GET', 'POST'])
-def login():
+def authorization():
     login_form = LoginForm()
     register_form = RegistrationForm()
     if login_form.validate_on_submit():
@@ -30,9 +30,9 @@ def login():
         db.session.add(user)
         db.session.commit()
         alert('Registration is successful. Now you can try to login', Alert.SUCCESS)
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.authorization'))
 
-    return render_template('auth/login.html', login_form=login_form, register_form=register_form)
+    return render_template('auth/authorization.html', login_form=login_form, register_form=register_form)
 
 
 @auth.route('/logout')
@@ -40,21 +40,4 @@ def login():
 def logout():
     logout_user()
     alert('You have been logged out.', Alert.DARK)
-    return redirect(url_for('auth.login'))
-
-
-# @auth.route('/register', methods=['GET', 'POST'])
-# def register():
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         user = User(
-#             email=form.email.data.lower(),
-#             username=form.username.data,
-#             password=form.password.data,
-#         )
-#         db.session.add(user)
-#         db.session.commit()
-#         alert('Registration is successful. Now you can try to login', Alert.SUCCESS)
-#         return redirect(url_for('auth.login'))
-#
-#     return render_template('auth/register.html', form=form)
+    return redirect(url_for('auth.authorization'))
