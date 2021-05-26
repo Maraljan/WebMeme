@@ -16,4 +16,4 @@ class Alert(str, Enum):
 
 
 def alert(message: str, category: Alert = Alert.DANGER):
-    flash(message, category)
+    flash(message, category.value)

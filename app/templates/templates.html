@@ -11,6 +11,13 @@
                 {{ form.csrf_token }}
                 {{ form.title.label(for="title", class="form-label") }}
                 {{ form.title(type="title", class="form-control", id="title") }}
+                {% if form.title.errors %}
+                    <ul class="errors">
+                        {% for error in form.title.errors %}
+                            <li class="text-danger">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 {{ form.img.label(for="img", class="form-label") }}
                 {{ form.img(type="file", class="form-control", id="img") }}
                 <button class="btn btn-outline-dark my-2" type="submit">Submit</button>

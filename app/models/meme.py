@@ -18,15 +18,19 @@ class Common:
 class MemeTemplate(db.Model, Common):
     __tablename__ = 'MemeTemplate'
     pk = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64), unique=True, index=True)
+    title = db.Column(db.String(64), index=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.pk'))
     memes = relationship('Meme', backref='template')
+    __table_args__ = (db.UniqueConstraint('title', 'owner_id', name='user_uniq_template'), )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def __repr__(self):
         return f'<MemeTemplate {self.title}>'
+
+
+db.Index('user_uniq_template', MemeTemplate.title, MemeTemplate.owner_id, unique=True)
 
 
 class Meme(db.Model, Common):

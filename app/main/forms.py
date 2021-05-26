@@ -1,3 +1,4 @@
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired
 from wtforms.validators import DataRequired, Length, ValidationError
@@ -11,7 +12,7 @@ class TemplateForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(1, 64)])
 
     def validate_title(self, field: StringField):
-        if MemeTemplate.query.filter_by(title=field.data).first():
+        if MemeTemplate.query.filter_by(title=field.data, owner_id=current_user.pk).first():
             raise ValidationError('Title already used')
 
 

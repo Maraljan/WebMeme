@@ -15,38 +15,38 @@
                 <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                     <div class="login-space">
                         <form method="post">
-                            {{ form.csrf_token }}
+                            {{ login_form.csrf_token }}
                             <div class="login">
-                                <div class="group"> <label for="user" class="label">Username</label>{{ form.email_login(type="email", class="input", id="email_login", placeholder="Create your email") }}</div>
-                                <div class="group"> <label for="pass" class="label">Password</label> {{ form.password_login(type="password", class="input", id="password_login", placeholder="Create your password") }}</div>
+                                <div class="group"> <label for="user" class="label">Username</label>{{ login_form.email_login(type="email", class="input", id="email_login", placeholder="Create your email") }}</div>
+                                <div class="group"> <label for="pass" class="label">Password</label> {{ login_form.password_login(type="password", class="input", id="password_login", placeholder="Create your password") }}</div>
                                 <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
                                 <div class="hr"></div>
                             </div>
                         </form>
                         <form method="post">
-                            {{ form2.csrf_token }}
+                            {{ register_form.csrf_token }}
                              <div class="sign-up-form">
-                                 <div class="group"> <label for="user" class="label">Username</label>{{ form2.username(type="text", class="input", id="username") }}</div>
-                                 <div class="group"> <label for="pass" class="label">Email Address</label>{{ form2.email(type="email", class="input", id="email", placeholder='name@example.com') }}</div>
-                                     {% if form2.email.errors %}
+                                 <div class="group"> <label for="user" class="label">Username</label>{{ register_form.username(type="text", class="input", id="username") }}</div>
+                                 <div class="group"> <label for="pass" class="label">Email Address</label>{{ register_form.email(type="email", class="input", id="email", placeholder='name@example.com') }}</div>
+                                     {% if register_form.email.errors %}
                                         <ul class="errors">
-                                     {% for error in form2.email.errors %}
+                                     {% for error in register_form.email.errors %}
                                         <li class="text-danger">{{ error }}</li>
                                      {% endfor %}
                                         </ul>
                                      {% endif %}
-                                 <div class="group"> <label for="pass" class="label">Password</label>{{ form2.password(type="password", class="input", id="password") }}</div>
-                                     {% if form2.password.errors %}
+                                 <div class="group"> <label for="pass" class="label">Password</label>{{ register_form.password(type="password", class="input", id="password") }}</div>
+                                     {% if register_form.password.errors %}
                                         <ul class="errors">
-                                     {% for error in form2.password.errors %}
+                                     {% for error in register_form.password.errors %}
                                         <li class="text-danger">{{ error }}</li>
                                      {% endfor %}
                                         </ul>
                                      {% endif %}
-                                 <div class="group"> <label for="pass" class="label">Repeat Password</label>{{ form2.repeat_password(type="password", class="input", id="repeat_password") }}</div>
-                                     {% if form2.repeat_password.errors %}
+                                 <div class="group"> <label for="pass" class="label">Repeat Password</label>{{ register_form.repeat_password(type="password", class="input", id="repeat_password") }}</div>
+                                     {% if register_form.repeat_password.errors %}
                                         <ul class="errors">
-                                     {% for error in form2.repeat_password.errors %}
+                                     {% for error in register_form.repeat_password.errors %}
                                         <li class="text-danger">{{ error }}</li>
                                      {% endfor %}
                                         </ul>

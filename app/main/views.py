@@ -12,7 +12,7 @@ from ..common.storage import ImageStorage
 from ..models.meme import MemeTemplate, Meme
 from ..services.image_processing import text_generate
 
-template_storage = ImageStorage(Path('Test'))
+template_storage = ImageStorage(Path('MemeTemplates'))
 meme_storage = ImageStorage(Path('Meme'))
 
 
