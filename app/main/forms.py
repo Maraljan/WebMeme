@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired
 from wtforms.validators import DataRequired, Length, ValidationError
-from wtforms import StringField, FileField
+from wtforms import StringField, FileField, BooleanField
 
 from app.models.meme import MemeTemplate
 
@@ -18,3 +18,4 @@ class TemplateForm(FlaskForm):
 class MemeForm(FlaskForm):
     text_top = StringField('Text_top', validators=[DataRequired(), Length(1, 64)])
     text_bottom = StringField('Text_bottom', validators=[DataRequired(), Length(1, 64)])
+    save_to_desktop = BooleanField()

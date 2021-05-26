@@ -28,8 +28,11 @@
                 <li class="list-group-item p-0" style="background-color: #86d3f0">
                     {{ form.text_bottom(type="text", class="form-control", id="text_bottom", placeholder='Enter bottom text') }}
                 </li>
+                <li class="list-group-item p-0" hidden style="background-color: #86d3f0">
+                    {{ form.save_to_desktop(id="save_to_desktop") }}
+                </li>
             </ul>
-            <button class="btn-outline-primary  to-saving" type="submit" hidden>Save to desktop</button>
+            <button class="btn-outline-primary to-saving" type="submit" hidden onclick="to_save()">Save to desktop</button>
             <button class="btn-outline-primary  to-saving" type="submit" hidden>Save to cloud</button>
             <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
             <a class="btn btn-outline-dark to-editing" type="submit" href="#"
@@ -37,4 +40,9 @@
                 <i class="bi bi-file-earmark-arrow-down" style="font-size: 150%"></i></a>
         </div>
     </form>
+    <script type="application/javascript">
+        function to_save(){
+            document.getElementById('save_to_desktop').checked = true
+        }
+    </script>
 {% endblock %}

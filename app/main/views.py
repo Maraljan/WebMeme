@@ -1,4 +1,5 @@
 from pathlib import Path
+from io import BytesIO
 
 from flask import render_template, redirect, url_for, send_file
 from flask_login import login_required, current_user
@@ -54,16 +55,28 @@ def create_meme(title: str):
     if form.validate_on_submit():
         abs_path = template_storage.get(template.image_path)
         edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
-        meme_path = meme_storage.save(edited_img)
-        meme = Meme(
-            owner_id=current_user.pk,
-            template_id=template.pk,
-            image_path=str(meme_path),
-        )
-        db.session.add(meme)
-        db.session.commit()
-        alert('Saving is successful.', Alert.SUCCESS)
-        return redirect((url_for('main.get_memes')))
+        if form.save_to_desktop.data:
+            abs_path = template_storage.get(template.image_path)
+            edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
+            buffer = BytesIO()
+            edited_img.save(buffer, format='PNG')
+            buffer.seek(0)
+            return send_file(
+                path_or_file=buffer,
+                as_attachment=True,
+                attachment_filename=meme_storage.generate_filename('png')
+            )
+        else:
+            meme_path = meme_storage.save(edited_img)
+            meme = Meme(
+                owner_id=current_user.pk,
+                template_id=template.pk,
+                image_path=str(meme_path),
+            )
+            db.session.add(meme)
+            db.session.commit()
+            alert('Saving is successful.', Alert.SUCCESS)
+            return redirect((url_for('main.get_memes')))
     return render_template('create_meme.html', form=form, template=template)
 
 
