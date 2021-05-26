@@ -19,8 +19,14 @@
                 </li>
             </ul>
 
-            <a class="btn btn-outline-dark to-saving" type="submit" hidden href="#" onclick="toggleElements('to-editing', false);
-                toggleElements('to-saving', true)">Back to edit</a>
+            <a
+                class="btn btn-outline-dark to-saving"
+                type="submit"
+                hidden href="#"
+                onclick="toggleElements('to-editing', false); toggleElements('to-saving', true)"
+            >
+                Back to edit
+            </a>
 
             <img src="{{ template.image_url() }}" class="card-img-top">
 
@@ -32,17 +38,45 @@
                     {{ form.save_to_desktop(id="save_to_desktop") }}
                 </li>
             </ul>
-            <button class="btn-outline-primary to-saving" type="submit" hidden onclick="to_save()">Save to desktop</button>
-            <button class="btn-outline-primary  to-saving" type="submit" hidden>Save to cloud</button>
-            <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
-            <a class="btn btn-outline-dark to-editing" type="submit" href="#"
-               onclick="toggleElements('to-editing', true); toggleElements('to-saving', false)">
-                <i class="bi bi-file-earmark-arrow-down" style="font-size: 150%"></i></a>
+
+            <button
+                class="btn-outline-primary to-saving"
+                type="submit"
+                hidden
+                onclick="to_desktop()"
+            >
+                Save to desktop
+            </button>
+
+            <button
+                id="save_to_cloud"
+                class="btn-outline-primary to-saving"
+                type="submit"
+                hidden
+                onclick="to_cloud()"
+            >
+                Save to cloud
+            </button>
+
+            <a
+                class="btn btn-outline-dark to-editing"
+                href="#"
+                onclick="toggleElements('to-editing', true); toggleElements('to-saving', false)"
+            >
+                <i class="bi bi-file-earmark-arrow-down text-center" style="font-size: 150%"></i>
+            </a>
+
         </div>
     </form>
+
     <script type="application/javascript">
-        function to_save(){
+        function to_desktop(){
             document.getElementById('save_to_desktop').checked = true
         }
+        function to_cloud(){
+            document.getElementById('save_to_cloud').checked = false
+        }
     </script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>
+
 {% endblock %}

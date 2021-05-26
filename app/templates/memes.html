@@ -5,16 +5,34 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="grid" data-masonry='{"percentPosition": true }'>
         {% for meme in memes %}
-            <div class="col-3">
-                <div class="card text-white">
-                    <img src="{{ meme.image_url() }}" class="card-img">
-                    <div class="col-10">
-                        <a href="{{ url_for('main.create_meme', title=meme.template.title) }}" class="btn btn-outline-light"><i class="bi bi-pencil-square"></i> Make a Meme</a>
-                    </div>
-                    <div class="col-2">
-                        <a href="{{ url_for('main.meme_download', meme_id=meme.pk) }}" class="btn text-danger"><i class="bi bi-file-arrow-down-fill" style="font-size: 150%;"></i></a>
+            <div class="col-4">
+                <div class="card m-2 text-white">
+                    <img src="{{ meme.image_url() }}">
+
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ url_for('main.create_meme', title=meme.template.title) }}"
+                                   class="btn btn-outline-primary text-dark mx-auto"
+                                >
+                                    <i class="bi bi-pencil-square"></i>
+                                    Make a Meme
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a
+                                    class="btn btn-outline-primary text-dark mx-auto"
+                                    href="{{ url_for('main.meme_download', meme_id=meme.pk) }}"
+                                    style="width: 100%;"
+                                >
+                                    <i class="bi bi-file-arrow-down-fill"></i>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
