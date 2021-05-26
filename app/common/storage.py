@@ -44,8 +44,9 @@ class ImageStorage:
         new_filename = uuid.uuid4()
         return f'{new_filename}.{extension}'
 
-    def remove(self, filename: str):
-        pass
+    def remove(self, image_path: str):
+        abs_path = self.get(image_path)
+        abs_path.unlink()
 
     @staticmethod
     def get(image_path: str) -> Path:

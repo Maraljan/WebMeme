@@ -32,6 +32,9 @@
                                     Download
                                 </a>
                             </div>
+                            <div class="col">
+                                <a href="{{ url_for('main.delete_template', pk=meme.template.pk) }}" class="btn btn-outline-primary text-dark"><i class="bi bi-trash-fill" style="font-size: 150%;"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
