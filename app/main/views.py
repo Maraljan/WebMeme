@@ -85,7 +85,7 @@ def create_meme(title: str):
 def get_memes():
     all_memes = Meme.query.filter_by(owner_id=current_user.pk)
     if all_memes.first() is None:
-        alert('Create your first meme! Go to template page', Alert.SECONDARY)
+        alert('Create your first meme! Go to template page', Alert.INFO)
     return render_template('memes.html', memes=all_memes)
 
 
@@ -105,3 +105,14 @@ def delete_template(pk: int):
     template_storage.remove(template.image_path)
     alert('Deleting is successful.', Alert.SUCCESS)
     return redirect((url_for('main.templates')))
+
+
+@main.route('/meme/<int:pk>', methods=['GET', 'POST'])
+@login_required
+def delete_meme(pk: int):
+    meme = Meme.query.filter_by(owner_id=current_user.pk, pk=pk).first()
+    db.session.delete(meme)
+    db.session.commit()
+    meme_storage.remove(meme.image_path)
+    alert('Deleting is successful.', Alert.SUCCESS)
+    return redirect((url_for('main.get_memes')))

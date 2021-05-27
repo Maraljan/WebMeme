@@ -37,7 +37,7 @@ class Meme(db.Model, Common):
     __tablename__ = 'Meme'
     pk = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.pk'))
-    template_id = db.Column(db.Integer, db.ForeignKey('MemeTemplate.pk'))
+    template_id = db.Column(db.Integer, db.ForeignKey('MemeTemplate.pk'), nullable=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -7,7 +7,7 @@
 {% block content %}
     <style>
         body{
-            background-color: #c55818;
+            background-color: #78909c;
         }
     </style>
     <form method="post">
@@ -35,7 +35,7 @@
                     {{ form.text_bottom(type="text", class="form-control", id="text_bottom", placeholder='Enter bottom text') }}
                 </li>
                 <li class="list-group-item p-0" hidden style="background-color: #86d3f0">
-                    {{ form.save_to_desktop(id="save_to_desktop") }}
+                    {{ form.save_to_desktop(id="save_to_desktop", type="checkbox") }}
                 </li>
             </ul>
 
@@ -74,7 +74,7 @@
             document.getElementById('save_to_desktop').checked = true
         }
         function to_cloud(){
-            document.getElementById('save_to_cloud').checked = false
+            document.getElementById('save_to_desktop').checked = false
         }
     </script>
     <script type="application/javascript" src="{{ url_for('static', filename='js/toggle-elements.js') }}"></script>

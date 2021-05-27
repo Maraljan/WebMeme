@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+    <style>
+        body{
+            background-color: #78909c;
+        }
+    </style>
     <div class="grid" data-masonry='{"percentPosition": true }'>
         {% for meme in memes %}
             <div class="col-4">
@@ -15,12 +20,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <a href="{{ url_for('main.create_meme', title=meme.template.title) }}"
-                                   class="btn btn-outline-primary text-dark mx-auto"
-                                >
-                                    <i class="bi bi-pencil-square"></i>
-                                    Make a Meme
-                                </a>
+                                {% if meme.template %}
+                                    <a href="{{ url_for('main.create_meme', title=meme.template.title) }}"
+                                       class="btn btn-outline-primary text-dark mx-auto"
+                                    >
+                                        <i class="bi bi-pencil-square"></i>
+                                        Make a Meme
+                                    </a>
+                                {% endif %}
                             </div>
                             <div class="col">
                                 <a
@@ -33,7 +40,7 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="{{ url_for('main.delete_template', pk=meme.template.pk) }}" class="btn btn-outline-primary text-dark"><i class="bi bi-trash-fill" style="font-size: 150%;"></i></a>
+                                <a href="{{ url_for('main.delete_meme', pk=meme.pk) }}" class="btn btn-outline-primary text-dark"><i class="bi bi-trash-fill" style="font-size: 150%;"></i></a>
                             </div>
                         </div>
                     </div>
