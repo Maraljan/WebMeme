@@ -56,8 +56,8 @@ def create_meme(title: str):
         abs_path = template_storage.get(template.image_path)
         edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
         if form.save_to_desktop.data:
-            abs_path = template_storage.get(template.image_path)
-            edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
+            # abs_path = meme_storage.get(template.image_path)
+            # edited_img = text_generate(form.text_top.data, form.text_bottom.data, abs_path)
             buffer = BytesIO()
             edited_img.save(buffer, format='PNG')
             buffer.seek(0)

@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <style>
-        body{
-            background-color: #78909c;
-        }
-    </style>
+
     <div class="grid" data-masonry='{"percentPosition": true }'>
         {% for meme in memes %}
             <div class="col-4">
@@ -23,6 +19,7 @@
                                 {% if meme.template %}
                                     <a href="{{ url_for('main.create_meme', title=meme.template.title) }}"
                                        class="btn btn-outline-primary text-dark mx-auto"
+                                        style="font-family: cursive"
                                     >
                                         <i class="bi bi-pencil-square"></i>
                                         Make a Meme
@@ -33,7 +30,9 @@
                                 <a
                                     class="btn btn-outline-primary text-dark mx-auto"
                                     href="{{ url_for('main.meme_download', meme_id=meme.pk) }}"
-                                    style="width: 100%;"
+                                    style="width: 100%;
+                                    font-family: cursive"
+
                                 >
                                     <i class="bi bi-file-arrow-down-fill"></i>
                                     Download

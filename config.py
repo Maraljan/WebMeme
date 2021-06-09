@@ -12,6 +12,7 @@ IMAGES_PREFIX = 'static/images'
 
 
 class Config:
+    # for crypto algorithm's
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

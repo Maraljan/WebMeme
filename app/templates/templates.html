@@ -4,44 +4,54 @@
     templates
 {% endblock %}
 
+{% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/img_upload.css') }}">
+{% endblock %}
+
 {% block content %}
-    <style>
-        body{
-            background-color: #78909c;
-        }
-    </style>
-    <div class="sidenav">
-        <div class="col col-6">
-            <form method="post" enctype="multipart/form-data">
-                {{ form.csrf_token }}
-                {{ form.title.label(for="title", class="form-label") }}
-                {{ form.title(type="title", class="form-control", id="title") }}
-                {% if form.title.errors %}
-                    <ul class="errors">
-                        {% for error in form.title.errors %}
-                            <li class="text-danger">{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                {{ form.img.label(for="img", class="form-label") }}
-                {{ form.img(type="file", class="form-control", id="img") }}
-                <button class="btn btn-outline-dark my-2" type="submit">Submit</button>
-            </form>
-        </div>
+    
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" class="col-4 offset-4 my-2 text-center">
+            {{ form.csrf_token }}
+            {{ form.title(type="title", class="form-control text-center", id="title", placeholder="title", style="border-radius: .99rem; font-family: cursive") }}
+            {% if form.title.errors %}
+                <ul class="errors">
+                    {% for error in form.title.errors %}
+                        <li class="text-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <main class="main_full">
+                <div class="my-1 text-center">
+                    <div class="button_outer">
+                        <div class="btn_upload" style="font-family: cursive">
+                            Upload Image
+                            {{ form.img(type="file", id="upload_file") }}
+                        </div>
+                        <div class="processing_bar"></div>
+                    </div>
+                </div>
+                <div class="error_msg"></div>
+                <div class="uploaded_file_view mx-auto" id="uploaded_view">
+                    <span class="file_remove">X</span>
+                </div>
+            </main>
+            <button class="btn btn-outline-dark" type="submit" style="font-family: cursive">Submit</button>
+        </form>
     </div>
     <div class="row">
         {% for template in all_templates %}
             <div class="col-3">
-                <div class="card text-white">
+                <div class="card text-white my-3">
                     <img src="{{ template.image_url() }}" class="card-img" style="height: 250px;">
                     <div class="card-img-overlay">
-                        <h5 class="card-title">{{ template.title }}</h5>
+                        <h5 class="card-title" style="font-family: cursive">{{ template.title }}</h5>
                         <div class="row position-absolute my-top-85 start-50 translate-middle">
                             <div class="col-10">
-                                <a href="{{ url_for('main.create_meme', title=template.title) }}" class="btn btn-outline-light"><i class="bi bi-pencil-square"></i> Make a Meme</a>
+                                <a href="{{ url_for('main.create_meme', title=template.title) }}" class="btn btn-outline-light" style="font-family: cursive"><i class="bi bi-pencil-square"></i> Make a Meme</a>
                             </div>
                             <div class="col-2">
-                                <a href="{{ url_for('main.delete_template', pk=template.pk) }}" class="btn text-dark"><i class="bi bi-trash-fill" style="font-size: 150%;"></i>Delete</a>
+                                <a href="{{ url_for('main.delete_template', pk=template.pk) }}" class="btn text-dark" style="font-family: cursive"><i class="bi bi-trash-fill" style="font-size: 150%;"></i>Delete</a>
                             </div>
                         </div>
                     </div>
@@ -49,4 +59,8 @@
             </div>
         {% endfor%}
     </div>
+{% endblock %}
+
+{% block js %}
+    <script type="application/javascript" src="{{ url_for('static', filename='js/img_upload.js') }}"></script>
 {% endblock %}

@@ -1,3 +1,8 @@
+body{
+    background-color: #7b7b7b;
+}
+
+
 .main-text{
     color: #ffffff;
     font-family: Bahnschrift,sans-serif;
@@ -18,3 +23,21 @@
 .my-top-85 {
   top: 85% !important;
 }
+
+.my-btn{
+    border-radius: 0.80rem;
+}
+.my-btn-outline-info {
+    color: #d9f7e5;
+    background-color: transparent;
+    background-image: none;
+    border-color: #000000;
+}
+/*.my-btn-outline-info:focus, .my-btn-outline-info.focus {*/
+/*  box-shadow: 0 0 0 0.2rem rgba(184, 23, 44, 0.5);*/
+/*}*/
+
+/*.my-btn-outline-info.disabled, .my-btn-outline-info:disabled {*/
+/*    color: #d5e3e5;*/
+/*    background-color: #bbcbd1;*/
+/*}*/

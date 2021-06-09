@@ -32,7 +32,7 @@ class ImageStorage:
             image.save(file_path)
         else:
             raise TypeError(f'{type(image)} is not supported')
-
+        # returning relative path
         return self.folder.joinpath(filename)
 
     @staticmethod
@@ -44,13 +44,15 @@ class ImageStorage:
         new_filename = uuid.uuid4()
         return f'{new_filename}.{extension}'
 
-    def remove(self, image_path: str):
-        abs_path = self.get(image_path)
+    def remove(self, image_relative_path: str):
+        abs_path = self.get(image_relative_path)
+
+        # deleting image from file_storage
         abs_path.unlink()
 
     @staticmethod
-    def get(image_path: str) -> Path:
-        file_path = IMAGES_DIR.joinpath(image_path)
-        if not file_path.exists():
+    def get(image_relative_path: str) -> Path:
+        abs_file_path = IMAGES_DIR.joinpath(image_relative_path)
+        if not abs_file_path.exists():
             raise FileNotFoundError
-        return file_path
+        return abs_file_path
